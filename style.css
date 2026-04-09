@@ -20,23 +20,35 @@ header {
     padding: 15px 50px;
     background: #111;
     color: white;
+    position: relative;
+    z-index: 1000;
 }
 
 .logo {
     font-size: 22px;
     font-weight: bold;
+    flex-shrink: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
 }
 
 .navbar ul {
     display: flex;
     gap: 30px;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar a {
     color: white;
     text-decoration: none;
     transition: 0.3s;
+    white-space: nowrap;
 }
 
 .navbar a:hover {
@@ -189,17 +201,49 @@ button:hover {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     header {
-        flex-direction: column;
-        gap: 15px;
+        padding: 15px 20px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .navbar {
+        margin-left: auto;
     }
 
     .navbar ul {
+        display: none;
         flex-direction: column;
-        gap: 10px;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #111;
+        padding: 10px 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        z-index: 999;
     }
 
+    .navbar ul.nav-open {
+        display: flex;
+    }
+
+    .navbar ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar ul li a {
+        display: block;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 600px) {
     .car-list {
         grid-template-columns: 1fr;
     }
@@ -211,5 +255,45 @@ button:hover {
     .hero h1 {
         font-size: 32px;
     }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400&display=swap');
+
+footer {
+  background: #0a0a0a;
+  border-top: 1px solid #1e1e1e;
+  padding: 28px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+}
+
+footer p {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  color: #666;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+footer p span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  color: #c9a84c;
+  margin: 0 2px;
 }
 
