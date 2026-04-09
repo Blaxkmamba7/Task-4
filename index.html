@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdul Cars</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <style>
        
         img {
@@ -75,13 +75,74 @@
         }
 
         
-        @media (max-width: 360px) {
+        /* ── Responsive Navigation ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 26px;
+            height: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .hamburger span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
             .navbar ul {
-                flex-wrap: wrap;
-                justify-content: center;
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #111;
+                padding: 10px 0;
+                margin: 0;
+                list-style: none;
+                z-index: 999;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            }
+            .navbar ul.nav-open {
+                display: flex;
+            }
+            .navbar ul li {
+                width: 100%;
+                text-align: center;
+            }
+            .navbar ul li a {
+                display: block;
+                padding: 12px 20px;
+                font-size: 15px;
             }
             .logo {
                 font-size: 18px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .logo {
+                font-size: 16px;
             }
         }
 
@@ -102,10 +163,15 @@
 </head>
 <body>
 
-    <header>
+    <header style="position: relative;">
         <div class="logo">Abdul Cars</div>
         <nav class="navbar">
-            <ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="navMenu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#models">Models</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -150,7 +216,7 @@
 
     <section id="contact" class="contact">
         <h2>Contact Us</h2>
-        <p><b>Email:</b> <a href="mailto:Abdulsamadbashir7@gmail.com">Abdulsamadbashir7@gmail.com</a></p>
+        <p><b>Email:</b> <a href="/cdn-cgi/l/email-protection#2e6f4c4a5b425d4f434f4a4c4f5d46475c196e49434f4742004d4143"><span class="__cf_email__" data-cfemail="60210204150c13010d01040201130809125720070d01090c4e030f0d">[email&#160;protected]</span></a></p>
         <p><b>Phone:</b> <a href="tel:07085877186">07085877186</a></p>
         <textarea placeholder="Your Message"></textarea>
         <button onclick="alert('Message sent!')">Send Message</button>
@@ -195,7 +261,19 @@
             document.getElementById("bookingForm").style.display = "none";
             document.getElementById("successMessage").style.display = "block";
         }
-    </script>
 
-</body>
-</html>
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("navMenu");
+
+        hamburger.addEventListener("click", function () {
+            hamburger.classList.toggle("open");
+            navMenu.classList.toggle("nav-open");
+        });
+
+        navMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                hamburger.classList.remove("open");
+                navMenu.classList.remove("nav-open");
+            });
+        });
+    </script>
